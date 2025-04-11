@@ -38,7 +38,7 @@ UserSchema.pre('save', async function(next) {
 })
 
 
-
+// Creating Custom Method- eg: user.comparePassword(userPassword)
 UserSchema.methods.comparePassword = async function(candidatePassword) {
     try {
         return await argon2.verify(this.password,candidatePassword)
@@ -47,7 +47,7 @@ UserSchema.methods.comparePassword = async function(candidatePassword) {
     }
 }
 
-UserSchema.index({username: 'text'})
+UserSchema.index({username: 'text'}) // Makes search faster , here it will make the text search faster
 
 const User = mongoose.model('User',UserSchema)
 module.exports = User
